@@ -1,0 +1,779 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wiki Diseño</title>
+    <link rel="stylesheet" href="estilo.css" />
+    <style>
+      /* ===== RESET Y ESTRUCTURA ===== */
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+      }
+      body {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+      main {
+        flex: 1;
+        padding: 60px 80px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      /* ===== BOTÓN HAMBURGUESA ===== */
+      .boton-menu {
+        display: none;
+        width: 46px;
+        height: 46px;
+        border: 1.5px solid #111;
+        border-radius: 10px;
+        background: #fff;
+        flex-direction: column;
+        justify-content: center;
+        gap: 5px;
+        padding: 10px;
+        cursor: pointer;
+      }
+      .boton-menu span {
+        display: block;
+        width: 100%;
+        height: 2px;
+        background: #111;
+        border-radius: 999px;
+      }
+
+      /* ===== MENÚ PRINCIPAL ===== */
+      .menu-temas {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px;
+        padding: 10px 16px;
+        margin-top: 28px;
+        background-color: #e9e6fa;
+      }
+
+      /* ===== MENÚS SECUNDARIOS ===== */
+      .menus-secundarios {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+        padding: 10px 20px;
+        margin: auto;
+        border-radius: 16px;
+        max-width: 600px;
+      }
+      .menu-item-secundario {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 32px;
+        border: 1.5px solid #111;
+        border-radius: 999px;
+        font-family: "Poppins", Arial, sans-serif;
+        font-size: 14px;
+        color: #111;
+        text-decoration: none;
+        background-color: #fff;
+        transition: all 0.25s ease;
+        cursor: pointer;
+      }
+      .menu-item-secundario:hover {
+        background-color: #fff;
+        color: #6c4dd3;
+        border-color: #111;
+        transform: translateY(-2px);
+      }
+      .menu-item-secundario.activo {
+        background-color: #6c4dd3;
+        color: #fff;
+        border-color: #6c4dd3;
+        box-shadow: 0 3px 8px rgba(108, 77, 211, 0.3);
+      }
+
+      /* ===== SECCIÓN TIPS ===== */
+      .seccion-tips {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 40px 80px;
+        border-radius: 16px;
+        max-width: 1300px;
+        width: 100%;
+        background: #fff;
+      }
+      .tips-contenido {
+        max-width: 1300px;
+        text-align: center;
+        margin: 0 auto;
+      }
+      .tips-contenido h2 {
+        font-family: "Poppins", Arial, sans-serif;
+        font-size: 28px;
+        font-weight: 700;
+        color: #111;
+        margin: 0 0 30px;
+        line-height: 1.3;
+      }
+      .tips-contenido h2 span {
+        color: #111;
+      }
+      .tips-contenido p {
+        font-family: "Roboto", Arial, sans-serif;
+        font-size: 16px;
+        line-height: 1.6;
+        color: #333;
+        margin: 0 0 35px;
+      }
+      .tips-lista {
+        display: flex;
+        justify-content: center;
+        gap: 60px;
+        margin-bottom: 35px;
+        padding: 0;
+        list-style: none;
+      }
+      .tips-lista li {
+        font-family: "Poppins", Arial, sans-serif;
+        font-size: 18px;
+        font-weight: 600;
+        color: #111;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 12px 30px;
+        border: 2px solid #6c4dd3;
+        border-radius: 50px;
+        background: #fff;
+        transition: all 0.3s ease;
+        cursor: default;
+        min-width: 120px;
+      }
+      .tips-lista li:hover {
+        background: #6c4dd3;
+        color: #fff;
+        transform: translateY(-3px);
+        box-shadow: 0 6px 20px rgba(108, 77, 211, 0.3);
+      }
+      .tips-lista li::before {
+        display: none;
+      }
+      .tips-cita {
+        font-family: "Poppins", Arial, sans-serif;
+        font-size: 20px;
+        font-weight: 600;
+        line-height: 1.5;
+        color: #111;
+        font-style: italic;
+        padding: 25px 0 0;
+        margin: 0 auto;
+        max-width: 1300px;
+      }
+
+      /* ===== SECCIONES CLASIFICA ===== */
+      .seccion-clasifica {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 40px;
+        padding: 50px 80px;
+        border-radius: 16px;
+        max-width: 1300px;
+        width: 100%;
+      }
+      .clasifica-contenido {
+        max-width: 1300px;
+        width: 100%;
+        margin: 0 auto;
+      }
+      .clasifica-contenido h2 {
+        font-family: "Poppins", Arial, sans-serif;
+        font-size: 26px;
+        font-weight: 700;
+        color: #111;
+        margin: 0 0 30px;
+        line-height: 1.3;
+        text-align: center;
+      }
+      .clasifica-grid {
+        display: flex;
+        gap: 40px;
+        align-items: stretch;
+      }
+      .clasifica-izquierda {
+        flex: 1.2;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        max-width: 500px;
+      }
+      .clasifica-izquierda img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        aspect-ratio: 4 / 3;
+        border-radius: 12px;
+        box-shadow: 0 4px 16px rgba(108, 77, 211, 0.15);
+      }
+      .clasifica-centro {
+        flex: 1.2;
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+      }
+      .concepto-texto {
+        font-family: "Roboto", Arial, sans-serif;
+        font-size: 15px;
+        line-height: 1.5;
+        color: #333;
+      }
+      .concepto-texto strong {
+        font-family: "Poppins", Arial, sans-serif;
+        font-weight: 700;
+        color: #111;
+        display: block;
+        font-size: 16px;
+        margin-bottom: 2px;
+      }
+      .concepto-texto p {
+        margin: 0;
+      }
+      .clasifica-derecha {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+      }
+      .item-tarjeta {
+        background: #fff;
+        padding: 16px 20px;
+        border-radius: 12px;
+        border-left: 4px solid #d9d9e3;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        font-family: "Roboto", Arial, sans-serif;
+        font-size: 15px;
+        line-height: 1.4;
+        color: #333;
+        transition: all 0.2s ease;
+      }
+      .item-tarjeta strong {
+        font-family: "Poppins", Arial, sans-serif;
+        font-weight: 600;
+        color: #111;
+        display: block;
+        margin-bottom: 2px;
+        font-size: 16px;
+      }
+      .item-tarjeta span {
+        font-size: 15px;
+        color: #555;
+      }
+      .item-tarjeta.resaltada {
+        border-left: 6px solid #6c4dd3;
+        background-color: #f5f0ff;
+        box-shadow: 0 4px 12px rgba(108, 77, 211, 0.12);
+      }
+      .item-tarjeta.resaltada strong {
+        color: #6c4dd3;
+      }
+
+      /* ===== RESPONSIVE ===== */
+      @media (max-width: 1024px) {
+        .boton-menu {
+          display: flex;
+          margin-top: 18px;
+        }
+        .menu-temas {
+          display: none;
+          flex-direction: column;
+          align-items: stretch;
+          width: 100%;
+          margin-top: 20px;
+          padding: 0;
+          gap: 10px;
+          background-color: transparent;
+        }
+        .menu-temas.abierto {
+          display: flex;
+        }
+        .menu-item {
+          width: 100%;
+          justify-content: flex-start;
+          padding: 14px 18px;
+          font-size: 14px;
+          border-radius: 8px;
+          background-color: #e9e6fa;
+        }
+        main {
+          padding: 40px 40px;
+        }
+        .menus-secundarios {
+          flex-direction: column;
+          align-items: center;
+          gap: 12px;
+          padding: 20px;
+          margin: 10px auto;
+          max-width: 100%;
+        }
+        .menu-item-secundario {
+          width: 100%;
+          justify-content: center;
+          padding: 12px 20px;
+          font-size: 14px;
+          background-color: #f5f3ff;
+        }
+        .header-wiki {
+          padding: 30px 40px 18px;
+        }
+        .header-superior {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 24px;
+        }
+        .busqueda-usuario {
+          width: 100%;
+          justify-content: space-between;
+        }
+        .barra-busqueda {
+          width: 100%;
+          max-width: none;
+        }
+        .footer-wiki {
+          grid-template-columns: repeat(2, 1fr);
+          padding: 35px 40px;
+        }
+
+        .seccion-tips {
+          padding: 30px 50px;
+          max-width: 100%;
+        }
+        .tips-contenido h2 {
+          font-size: 24px;
+          margin-bottom: 25px;
+        }
+        .tips-contenido p {
+          margin-bottom: 30px;
+        }
+        .tips-lista {
+          gap: 30px;
+          flex-wrap: wrap;
+          margin-bottom: 30px;
+        }
+        .tips-lista li {
+          font-size: 16px;
+          padding: 10px 25px;
+          min-width: 100px;
+        }
+        .tips-cita {
+          font-size: 18px;
+          max-width: 100%;
+          padding-top: 20px;
+        }
+
+        .seccion-clasifica {
+          padding: 35px 40px;
+          max-width: 100%;
+        }
+        .clasifica-contenido h2 {
+          font-size: 22px;
+        }
+        .clasifica-grid {
+          flex-direction: column;
+          gap: 30px;
+        }
+        .clasifica-izquierda {
+          flex: none;
+          width: 100%;
+          max-width: 450px;
+          margin: 0 auto;
+        }
+        .clasifica-izquierda img {
+          max-width: 100%;
+          aspect-ratio: 4 / 3;
+        }
+        .clasifica-centro,
+        .clasifica-derecha {
+          flex: none;
+          width: 100%;
+        }
+      }
+
+      @media (max-width: 600px) {
+        .header-wiki {
+          padding: 25px 20px 16px;
+        }
+        .titulo-wiki h1 {
+          font-size: 42px;
+        }
+        .busqueda-usuario {
+          gap: 15px;
+        }
+        .barra-busqueda {
+          height: 52px;
+        }
+        .icono-usuario {
+          width: 42px;
+          height: 42px;
+        }
+        main {
+          padding: 25px 16px;
+        }
+        .menus-secundarios {
+          gap: 10px;
+          padding: 16px;
+          border-radius: 12px;
+        }
+        .menu-item-secundario {
+          padding: 10px 16px;
+          font-size: 13px;
+          width: 100%;
+          justify-content: center;
+        }
+        .footer-wiki {
+          grid-template-columns: 1fr;
+          padding: 30px 20px;
+          gap: 24px;
+        }
+        .footer-social {
+          justify-content: flex-start;
+        }
+
+        .seccion-tips {
+          padding: 25px 20px;
+        }
+        .tips-contenido h2 {
+          font-size: 20px;
+          margin-bottom: 20px;
+        }
+        .tips-contenido p {
+          font-size: 14px;
+          margin-bottom: 25px;
+        }
+        .tips-lista {
+          flex-direction: column;
+          gap: 15px;
+          align-items: center;
+          margin-bottom: 25px;
+        }
+        .tips-lista li {
+          font-size: 15px;
+          padding: 10px 30px;
+          min-width: 140px;
+          width: 100%;
+          max-width: 200px;
+        }
+        .tips-cita {
+          font-size: 16px;
+          padding-top: 18px;
+        }
+
+        .seccion-clasifica {
+          padding: 25px 20px;
+          margin-top: 30px;
+        }
+        .clasifica-contenido h2 {
+          font-size: 18px;
+          text-align: center;
+        }
+        .clasifica-grid {
+          flex-direction: column;
+          gap: 20px;
+        }
+        .clasifica-izquierda {
+          max-width: 100%;
+        }
+        .clasifica-izquierda img {
+          max-width: 100%;
+          aspect-ratio: 4 / 3;
+        }
+        .clasifica-centro {
+          gap: 14px;
+        }
+        .concepto-texto {
+          font-size: 14px;
+        }
+        .concepto-texto strong {
+          font-size: 15px;
+        }
+        .clasifica-derecha {
+          gap: 14px;
+        }
+        .item-tarjeta {
+          padding: 14px 16px;
+          font-size: 14px;
+        }
+        .item-tarjeta strong {
+          font-size: 15px;
+        }
+      }
+
+      @media (max-width: 400px) {
+        main {
+          padding: 20px 12px;
+        }
+        .seccion-tips {
+          padding: 20px 15px;
+        }
+        .tips-contenido h2 {
+          font-size: 18px;
+          margin-bottom: 15px;
+        }
+        .tips-contenido p {
+          font-size: 13px;
+          margin-bottom: 20px;
+        }
+        .tips-lista {
+          gap: 12px;
+        }
+        .tips-lista li {
+          font-size: 14px;
+          padding: 8px 20px;
+          min-width: 120px;
+        }
+        .tips-cita {
+          font-size: 14px;
+          padding-top: 15px;
+        }
+        .seccion-clasifica {
+          padding: 20px 15px;
+          margin-top: 25px;
+        }
+        .clasifica-contenido h2 {
+          font-size: 16px;
+        }
+        .concepto-texto {
+          font-size: 13px;
+        }
+        .concepto-texto strong {
+          font-size: 14px;
+        }
+        .item-tarjeta {
+          padding: 12px 14px;
+          font-size: 13px;
+        }
+        .item-tarjeta strong {
+          font-size: 14px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- HEADER -->
+    <header class="header-wiki">
+      <div class="header-superior">
+        <div class="titulo-wiki">
+          <h1>Wiki <span>Diseño</span></h1>
+          <p>Todo sobre diseño en un solo lugar.</p>
+        </div>
+        <div class="busqueda-usuario">
+          <div class="barra-busqueda">
+            <img src="img/lupa.svg" alt="Buscar" />
+            <input type="text" placeholder="Buscar temas de diseño..." />
+          </div>
+          <img class="icono-usuario" src="img/user-icon.svg" alt="Usuario" />
+        </div>
+      </div>
+      <button class="boton-menu" id="boton-menu" aria-label="Abrir menú" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="menu-temas" id="menu-temas">
+        <a href="#" class="menu-item"><img src="img/user-experience.svg" alt="" /><span>Experiencia de usuario</span></a>
+        <a href="#" class="menu-item"><img src="img/web-design.svg" alt="" /><span>Diseño web</span></a>
+        <a href="#" class="menu-item"><img src="img/design-thinking.svg" alt="" /><span>Design thinking</span></a>
+        <a href="#" class="menu-item"><img src="img/user-focus.svg" alt="" /><span>Diseño centrado en el usuario</span></a>
+        <a href="#" class="menu-item"><img src="img/interactive.svg" alt="" /><span>Diseño de interacción</span></a>
+        <a href="Arquitectura-de-la-informacion.html" class="menu-item" id="menu-arquitectura"><img src="img/information.svg" alt="" /><span>Arquitectura de la información</span></a>
+        <a href="#" class="menu-item"><img src="img/nav-design.svg" alt="" /><span>Diseño de navegación</span></a>
+        <a href="#" class="menu-item"><img src="img/visual-design.svg" alt="" /><span>Diseño visual</span></a>
+      </nav>
+    </header>
+
+    <!-- MENÚS SECUNDARIOS -->
+    <div class="menus-secundarios">
+      <a href="Herramientas.html" class="menu-item-secundario" id="menu-herramientas">Herramientas</a>
+      <a href="Origenes.html" class="menu-item-secundario" id="menu-origenes">Orígenes</a>
+      <a href="Navegacion.html" class="menu-item-secundario" id="menu-navegacion">Navegación</a>
+    </div>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main>
+      <!-- SECCIÓN TIPS -->
+      <section class="seccion-tips">
+        <div class="tips-contenido">
+          <h2>TIPS PARA IDENTIFICAR UNA BUENA <span>ARQUITECTURA DE LA INFORMACIÓN</span></h2>
+          <p>Al navegar por una página web es posible identificar si cuenta con una buena Arquitectura de la Información.</p>
+          <ul class="tips-lista">
+            <li>ENCUENTRA</li>
+            <li>OBSERVA</li>
+            <li>NAVEGA</li>
+            <li>EVALUA</li>
+          </ul>
+          <p class="tips-cita">" La mejor arquitectura es aquella que el usuario casi no nota, porque encontrará lo que busca resulta natural e intuitivo."</p>
+        </div>
+      </section>
+
+      <!-- SECCIÓN 1 -->
+      <section class="seccion-clasifica">
+        <div class="clasifica-contenido">
+          <h2>CLASIFICA, ESTRUCTURA Y ETIQUETA EL CONTENIDO PARA QUE LOS USUARIOS ENCUENTREN FACILMENTE LO QUE BUSCAN</h2>
+          <div class="clasifica-grid">
+            <div class="clasifica-izquierda"><img src="images/Arquitectura/Mapa.jpg" alt="Estructura de la información" /></div>
+            <div class="clasifica-centro">
+              <div class="concepto-texto"><strong>Categorías:</strong><p>Son grupos principales que organizan la información según un tema o característica común. Ayudan a los usuarios a localizar contenidos de forma más rápida y ordenada.</p></div>
+              <div class="concepto-texto"><strong>Etiquetas:</strong><p>Son palabras clave que describen el contenido y facilitan su búsqueda, relación y filtrado dentro de un sitio web o sistema de información.</p></div>
+              <div class="concepto-texto"><strong>Jerarquías:</strong><p>Organizan la información en diferentes niveles de importancia, estableciendo relaciones claras entre páginas, secciones y contenidos.</p></div>
+              <div class="concepto-texto"><strong>Taxonomías:</strong><p>Son sistemas de clasificación que definen cómo se agrupa y estructura la información. Permiten mantener una organización coherente y escalable.</p></div>
+            </div>
+            <div class="clasifica-derecha">
+              <div class="item-tarjeta resaltada"><strong>Organización de la información</strong><span>Clasifica, estructura y etiqueta</span></div>
+              <div class="item-tarjeta"><strong>Tipos de Estructuras más comunes</strong><span>Organiza el contenido en niveles</span></div>
+              <div class="item-tarjeta"><strong>Ejemplos de arquitectura de la información</strong><span>Nada mejor que ver ejemplos prácticos</span></div>
+              <div class="item-tarjeta"><strong>Mejora de la Experiencia del Usuario</strong><span>Usabilidad y flexibilidad</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECCIÓN 2 -->
+      <section class="seccion-clasifica">
+        <div class="clasifica-contenido">
+          <h2>ORGANIZA EL CONTENIDO EN NIVELES PARA FACILITAR LA NAVEGACIÓN Y EL ACCESO A LA INFORMACIÓN.</h2>
+          <div class="clasifica-grid">
+            <div class="clasifica-izquierda"><img src="images/Arquitectura/Biblioteca ordenada.jpg" alt="Niveles de organización" /></div>
+            <div class="clasifica-centro">
+              <div class="concepto-texto"><strong>Arquitectura jerárquica:</strong><p>Este es el modelo más usado. Funciona como un árbol en el que la información se organiza por niveles. Es ideal para sitios con mucho contenido, ya que ayuda a guiar al usuario por categorías principales y subcategorías.</p></div>
+              <div class="concepto-texto"><strong>Arquitectura secuencial:</strong><p>Aquí, los usuarios navegan de manera lineal, siguiendo un camino predeterminado. Es útil cuando el contenido debe ser consumido en un orden específico, como en cursos o tutoriales.</p></div>
+              <div class="concepto-texto"><strong>Arquitectura matricial o en red:</strong><p>En este modelo, los usuarios tienen más libertad para moverse entre diferentes secciones. Los contenidos están interconectados, lo que les permite explorar el sitio según sus intereses, sin un orden estricto.</p></div>
+            </div>
+            <div class="clasifica-derecha">
+              <div class="item-tarjeta"><strong>Organización de la información</strong><span>Clasifica, estructura y etiqueta</span></div>
+              <div class="item-tarjeta resaltada"><strong>Tipos de Estructuras más comunes</strong><span>Organiza el contenido en niveles</span></div>
+              <div class="item-tarjeta"><strong>Ejemplos de arquitectura de la información</strong><span>Nada mejor que ver ejemplos prácticos</span></div>
+              <div class="item-tarjeta"><strong>Mejora de la Experiencia del Usuario</strong><span>Usabilidad y flexibilidad</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECCIÓN 3 -->
+      <section class="seccion-clasifica">
+        <div class="clasifica-contenido">
+          <h2>DESCUBRE CÓMO LAS PLATAFORMAS DIGITALES ORGANIZAN SU CONTENIDO PARA MEJORAR LA EXPERIENCIA DEL USUARIO.</h2>
+          <div class="clasifica-grid">
+            <div class="clasifica-izquierda"><img src="images/Arquitectura/Plataformas.png" alt="Plataformas digitales" /></div>
+            <div class="clasifica-centro">
+              <div class="concepto-texto">
+                <p>La Arquitectura de la Información está presente en muchas de las plataformas que utilizamos diariamente. Sitios como Wikipedia, Walmart, Amazon y Netflix organizan su contenido mediante categorías, jerarquías, filtros y sistemas de búsqueda que permiten a los usuarios acceder a la información de forma rápida, intuitiva y eficiente.</p>
+                <p style="margin-top:12px;"><strong>¡Conócelos!</strong></p>
+                <ul style="margin-top:4px; padding-left:20px;">
+                  <li><strong>Wikipedia</strong> — https://es.wikipedia.org/</li>
+                  <li><strong>Mercado Libre</strong> — https://www.mercadolibre.com.mx/</li>
+                  <li><strong>Walmart en Línea</strong> — https://www.walmart.com.mx/</li>
+                  <li><strong>Amazon</strong> — https://www.amazon.com.mx/</li>
+                </ul>
+              </div>
+            </div>
+            <div class="clasifica-derecha">
+              <div class="item-tarjeta"><strong>Organización de la información</strong><span>Clasifica, estructura y etiqueta</span></div>
+              <div class="item-tarjeta"><strong>Tipos de Estructuras más comunes</strong><span>Organiza el contenido en niveles</span></div>
+              <div class="item-tarjeta resaltada"><strong>Ejemplos de arquitectura de la información</strong><span>Nada mejor que ver ejemplos prácticos</span></div>
+              <div class="item-tarjeta"><strong>Mejora de la Experiencia del Usuario</strong><span>Usabilidad y flexibilidad</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECCIÓN 4 -->
+      <section class="seccion-clasifica">
+        <div class="clasifica-contenido">
+          <h2>FACILITA EL ACCESO A LA INFORMACIÓN Y MEJORAR LA NAVEGACIÓN DEL USUARIO</h2>
+          <div class="clasifica-grid">
+            <div class="clasifica-izquierda"><img src="images/Arquitectura/satisfacción.jpg" alt="Acceso a la información" /></div>
+            <div class="clasifica-centro">
+              <div class="concepto-texto"><strong>Usabilidad</strong><p>Asegura que el sistema sea fácil de usar y entender. Esto incluye reducir la carga cognitiva del usuario al presentar la información de manera clara y equilibrada.</p></div>
+              <div class="concepto-texto"><strong>Flexibilidad</strong><p>Permite adaptaciones según las necesidades del usuario y el contexto en el que se utiliza el sistema. Esto incluye ajustar la estructura conforme crece el contenido o cambian las necesidades del público.</p></div>
+            </div>
+            <div class="clasifica-derecha">
+              <div class="item-tarjeta"><strong>Organización de la información</strong><span>Clasifica, estructura y etiqueta</span></div>
+              <div class="item-tarjeta"><strong>Tipos de Estructuras más comunes</strong><span>Organiza el contenido en niveles</span></div>
+              <div class="item-tarjeta"><strong>Ejemplos de arquitectura de la información</strong><span>Nada mejor que ver ejemplos prácticos</span></div>
+              <div class="item-tarjeta resaltada"><strong>Mejora de la Experiencia del Usuario</strong><span>Usabilidad y flexibilidad</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- BOTÓN SUBIR -->
+    <button class="btn-arriba" id="btn-arriba" aria-label="Volver al inicio">↑</button>
+
+    <!-- FOOTER -->
+    <footer class="footer-wiki">
+      <div class="footer-logo">
+        <img src="img/logo.svg" alt="Logo Wiki Diseño" />
+        <h2>Wiki <span>Diseño</span></h2>
+      </div>
+      <div class="footer-links">
+        <a href="#">Política de Privacidad</a>
+        <a href="#">Aviso Legal</a>
+        <a href="#">Contacto</a>
+      </div>
+      <div class="footer-links">
+        <a href="#">Preguntas Frecuentes</a>
+        <a href="#">Sobre Nosotros</a>
+      </div>
+      <div class="footer-social">
+        <a href="#"><img src="img/fb.svg" alt="Facebook" /></a>
+        <a href="#"><img src="img/ig.svg" alt="Instagram" /></a>
+        <a href="#"><img src="img/yt.svg" alt="YouTube" /></a>
+      </div>
+    </footer>
+
+    <script>
+      // ===== MENÚ ACTIVO =====
+      document.addEventListener("DOMContentLoaded", () => {
+        const paginaActual = window.location.pathname.split("/").pop();
+        const menuArquitectura = document.getElementById("menu-arquitectura");
+        const paginasSubmenu = ["Herramientas.html", "Origenes.html", "Navegacion.html"];
+
+        if (paginasSubmenu.includes(paginaActual)) {
+          menuArquitectura.classList.add("activo");
+          const mapa = { "Herramientas.html": "menu-herramientas", "Origenes.html": "menu-origenes", "Navegacion.html": "menu-navegacion" };
+          const id = mapa[paginaActual];
+          if (id) document.getElementById(id).classList.add("activo");
+        } else {
+          document.querySelectorAll(".menu-item").forEach((el) => {
+            if (el.getAttribute("href") === paginaActual) el.classList.add("activo");
+          });
+          if (paginaActual === "Arquitectura-de-la-informacion.html") {
+            menuArquitectura.classList.add("activo");
+          }
+        }
+      });
+
+      // ===== TOGGLE MENÚ HAMBURGUESA =====
+      const botonMenu = document.getElementById("boton-menu");
+      const menu = document.getElementById("menu-temas");
+      botonMenu.addEventListener("click", () => {
+        menu.classList.toggle("abierto");
+        const expanded = botonMenu.getAttribute("aria-expanded") === "true";
+        botonMenu.setAttribute("aria-expanded", !expanded);
+      });
+
+      // ===== BOTÓN SUBIR =====
+      const botonArriba = document.getElementById("btn-arriba");
+      window.addEventListener("scroll", () => {
+        botonArriba.classList.toggle("visible", window.scrollY > 350);
+      });
+      botonArriba.addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+    </script>
+  </body>
+</html>

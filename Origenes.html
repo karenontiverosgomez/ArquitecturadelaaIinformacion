@@ -1,0 +1,458 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wiki Diseño</title>
+    <link rel="stylesheet" href="estilo.css" />
+    <style>
+      /* ===== RESET ===== */
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+      }
+      body {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+      main {
+        flex: 1;
+        padding: 60px 80px;
+      }
+
+      /* ===== BOTÓN HAMBURGUESA ===== */
+      .boton-menu {
+        display: none;
+        width: 46px;
+        height: 46px;
+        border: 1.5px solid #111;
+        border-radius: 10px;
+        background: #fff;
+        flex-direction: column;
+        justify-content: center;
+        gap: 5px;
+        padding: 10px;
+        cursor: pointer;
+      }
+      .boton-menu span {
+        display: block;
+        width: 100%;
+        height: 2px;
+        background: #111;
+        border-radius: 999px;
+      }
+
+      /* ===== MENÚ PRINCIPAL ===== */
+      .menu-temas {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px;
+        padding: 10px 16px;
+        margin-top: 28px;
+        background-color: #e9e6fa;
+      }
+
+      /* ===== MENÚS SECUNDARIOS ===== */
+      .menus-secundarios {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+        padding: 10px 20px;
+        margin: auto;
+        border-radius: 16px;
+        max-width: 600px;
+      }
+      .menu-item-secundario {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 32px;
+        border: 1.5px solid #111;
+        border-radius: 999px;
+        font-family: "Poppins", Arial, sans-serif;
+        font-size: 14px;
+        color: #111;
+        text-decoration: none;
+        background-color: #fff;
+        transition: all 0.25s ease;
+        cursor: pointer;
+      }
+      .menu-item-secundario:hover {
+        background-color: #fff;
+        color: #6c4dd3;
+        border-color: #111;
+        transform: translateY(-2px);
+      }
+      .menu-item-secundario.activo {
+        background-color: #6c4dd3;
+        color: #fff;
+        border-color: #6c4dd3;
+        box-shadow: 0 3px 8px rgba(108, 77, 211, 0.3);
+      }
+
+      /* ===== SECCIÓN VIDEO + TEXTO ===== */
+      .seccion-video-texto {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 40px;
+        margin-top: 50px;
+        padding: 30px;
+        border-radius: 16px;
+      }
+      .video-contenedor {
+        flex: 0 0 auto;
+        width: 560px;
+        max-width: 100%;
+        aspect-ratio: 16 / 9;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+      }
+      .video-contenedor iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+      }
+      .texto-video {
+        flex: 1;
+        max-width: 500px;
+        padding: 20px;
+      }
+      .texto-video p {
+        font-family: "Poppins", Arial, sans-serif;
+        font-size: 22px;
+        font-weight: 600;
+        line-height: 1.5;
+        color: #111;
+        margin: 0;
+        font-style: italic;
+      }
+
+      /* ===== RESPONSIVE ===== */
+      @media (max-width: 1024px) {
+        .boton-menu {
+          display: flex;
+          margin-top: 18px;
+        }
+        .menu-temas {
+          display: none;
+          flex-direction: column;
+          align-items: stretch;
+          width: 100%;
+          margin-top: 20px;
+          padding: 0;
+          gap: 10px;
+          background-color: transparent;
+        }
+        .menu-temas.abierto {
+          display: flex;
+        }
+        .menu-item {
+          width: 100%;
+          justify-content: flex-start;
+          padding: 14px 18px;
+          font-size: 14px;
+          border-radius: 8px;
+          background-color: #e9e6fa;
+        }
+        main {
+          padding: 40px 40px;
+        }
+        .menus-secundarios {
+          flex-direction: column;
+          align-items: center;
+          gap: 12px;
+          padding: 20px;
+          margin: 10px auto;
+          max-width: 100%;
+        }
+        .menu-item-secundario {
+          width: 100%;
+          justify-content: center;
+          padding: 12px 20px;
+          font-size: 14px;
+          background-color: #f5f3ff;
+        }
+        .header-wiki {
+          padding: 30px 40px 18px;
+        }
+        .header-superior {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 24px;
+        }
+        .busqueda-usuario {
+          width: 100%;
+          justify-content: space-between;
+        }
+        .barra-busqueda {
+          width: 100%;
+          max-width: none;
+        }
+        .footer-wiki {
+          grid-template-columns: repeat(2, 1fr);
+          padding: 35px 40px;
+        }
+
+        /* VIDEO + TEXTO TABLET */
+        .seccion-video-texto {
+          flex-direction: column;
+          align-items: center;
+          gap: 25px;
+          padding: 25px;
+        }
+        .video-contenedor {
+          width: 100%;
+          max-width: 600px;
+        }
+        .texto-video {
+          max-width: 100%;
+          text-align: center;
+          padding: 0;
+        }
+        .texto-video p {
+          font-size: 20px;
+        }
+      }
+
+      @media (max-width: 600px) {
+        .header-wiki {
+          padding: 25px 20px 16px;
+        }
+        .titulo-wiki h1 {
+          font-size: 42px;
+        }
+        .busqueda-usuario {
+          gap: 15px;
+        }
+        .barra-busqueda {
+          height: 52px;
+        }
+        .icono-usuario {
+          width: 42px;
+          height: 42px;
+        }
+        main {
+          padding: 25px 16px;
+        }
+        .menus-secundarios {
+          gap: 10px;
+          padding: 16px;
+          border-radius: 12px;
+        }
+        .menu-item-secundario {
+          padding: 10px 16px;
+          font-size: 13px;
+          width: 100%;
+          justify-content: center;
+        }
+        .footer-wiki {
+          grid-template-columns: 1fr;
+          padding: 30px 20px;
+          gap: 24px;
+        }
+        .footer-social {
+          justify-content: flex-start;
+        }
+
+        /* VIDEO + TEXTO MÓVIL */
+        .seccion-video-texto {
+          flex-direction: column;
+          gap: 20px;
+          padding: 20px 16px;
+        }
+        .video-contenedor {
+          width: 100%;
+          max-width: 100%;
+        }
+        .texto-video {
+          padding: 0;
+          text-align: center;
+        }
+        .texto-video p {
+          font-size: 17px;
+          line-height: 1.4;
+        }
+      }
+
+      @media (max-width: 400px) {
+        main {
+          padding: 20px 12px;
+        }
+        .texto-video p {
+          font-size: 15px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- HEADER -->
+    <header class="header-wiki">
+      <div class="header-superior">
+        <div class="titulo-wiki">
+          <h1>Wiki <span>Diseño</span></h1>
+          <p>Todo sobre diseño en un solo lugar.</p>
+        </div>
+        <div class="busqueda-usuario">
+          <div class="barra-busqueda">
+            <img src="img/lupa.svg" alt="Buscar" />
+            <input type="text" placeholder="Buscar temas de diseño..." />
+          </div>
+          <img class="icono-usuario" src="img/user-icon.svg" alt="Usuario" />
+        </div>
+      </div>
+
+      <button class="boton-menu" id="boton-menu" aria-label="Abrir menú" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+
+      <!-- MENÚ PRINCIPAL -->
+      <nav class="menu-temas" id="menu-temas">
+        <a href="#" class="menu-item">
+          <img src="img/user-experience.svg" alt="" />
+          <span>Experiencia de usuario</span>
+        </a>
+        <a href="#" class="menu-item">
+          <img src="img/web-design.svg" alt="" />
+          <span>Diseño web</span>
+        </a>
+        <a href="#" class="menu-item">
+          <img src="img/design-thinking.svg" alt="" />
+          <span>Design thinking</span>
+        </a>
+        <a href="#" class="menu-item">
+          <img src="img/user-focus.svg" alt="" />
+          <span>Diseño centrado en el usuario</span>
+        </a>
+        <a href="#" class="menu-item">
+          <img src="img/interactive.svg" alt="" />
+          <span>Diseño de interacción</span>
+        </a>
+        <a href="Arquitectura-de-la-informacion.html" class="menu-item" id="menu-arquitectura">
+          <img src="img/information.svg" alt="" />
+          <span>Arquitectura de la información</span>
+        </a>
+        <a href="#" class="menu-item">
+          <img src="img/nav-design.svg" alt="" />
+          <span>Diseño de navegación</span>
+        </a>
+        <a href="#" class="menu-item">
+          <img src="img/visual-design.svg" alt="" />
+          <span>Diseño visual</span>
+        </a>
+      </nav>
+    </header>
+
+    <!-- MENÚS SECUNDARIOS -->
+    <div class="menus-secundarios">
+      <a href="Herramientas.html" class="menu-item-secundario" id="menu-herramientas">
+        Herramientas
+      </a>
+      <a href="Origenes.html" class="menu-item-secundario" id="menu-origenes">
+        Orígenes
+      </a>
+      <a href="Navegacion.html" class="menu-item-secundario" id="menu-navegacion">
+        Navegación
+      </a>
+    </div>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main>
+      <!-- SECCIÓN VIDEO + TEXTO -->
+      <section class="seccion-video-texto">
+        <div class="video-contenedor">
+          <iframe
+            src="https://www.youtube.com/embed/S49-zJ0-_ec"
+            title="Arquitectura de la Información"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </div>
+        <div class="texto-video">
+          <p>"La Arquitectura de la Información surge para ayudar a las personas a encontrar la información correcta en el momento adecuado, mediante estructuras organizadas, intuitivas y fáciles de navegar".</p>
+        </div>
+      </section>
+    </main>
+
+    <!-- BOTÓN SUBIR -->
+    <button class="btn-arriba" id="btn-arriba" aria-label="Volver al inicio">
+      ↑
+    </button>
+
+    <!-- FOOTER -->
+    <footer class="footer-wiki">
+      <div class="footer-logo">
+        <img src="img/logo.svg" alt="Logo Wiki Diseño" />
+        <h2>Wiki <span>Diseño</span></h2>
+      </div>
+      <div class="footer-links">
+        <a href="#">Política de Privacidad</a>
+        <a href="#">Aviso Legal</a>
+        <a href="#">Contacto</a>
+      </div>
+      <div class="footer-links">
+        <a href="#">Preguntas Frecuentes</a>
+        <a href="#">Sobre Nosotros</a>
+      </div>
+      <div class="footer-social">
+        <a href="#"><img src="img/fb.svg" alt="Facebook" /></a>
+        <a href="#"><img src="img/ig.svg" alt="Instagram" /></a>
+        <a href="#"><img src="img/yt.svg" alt="YouTube" /></a>
+      </div>
+    </footer>
+
+    <script>
+      // ===== MENÚ ACTIVO =====
+      document.addEventListener("DOMContentLoaded", () => {
+        const paginaActual = window.location.pathname.split("/").pop();
+        const menuArquitectura = document.getElementById("menu-arquitectura");
+        const paginasSubmenu = ["Herramientas.html", "Origenes.html", "Navegacion.html"];
+
+        if (paginasSubmenu.includes(paginaActual)) {
+          menuArquitectura.classList.add("activo");
+          if (paginaActual === "Herramientas.html") {
+            document.getElementById("menu-herramientas").classList.add("activo");
+          } else if (paginaActual === "Origenes.html") {
+            document.getElementById("menu-origenes").classList.add("activo");
+          } else if (paginaActual === "Navegacion.html") {
+            document.getElementById("menu-navegacion").classList.add("activo");
+          }
+        } else {
+          document.querySelectorAll(".menu-item").forEach((enlace) => {
+            if (enlace.getAttribute("href") === paginaActual) {
+              enlace.classList.add("activo");
+            }
+          });
+          if (paginaActual === "Arquitectura-de-la-informacion.html") {
+            menuArquitectura.classList.add("activo");
+          }
+        }
+      });
+
+      // ===== TOGGLE MENÚ HAMBURGUESA =====
+      const botonMenu = document.getElementById("boton-menu");
+      const menu = document.getElementById("menu-temas");
+      botonMenu.addEventListener("click", () => {
+        menu.classList.toggle("abierto");
+        botonMenu.setAttribute(
+          "aria-expanded",
+          botonMenu.getAttribute("aria-expanded") === "true" ? "false" : "true"
+        );
+      });
+
+      // ===== BOTÓN SUBIR =====
+      const botonArriba = document.getElementById("btn-arriba");
+      window.addEventListener("scroll", () => {
+        botonArriba.classList.toggle("visible", window.scrollY > 350);
+      });
+      botonArriba.addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+    </script>
+  </body>
+</html>

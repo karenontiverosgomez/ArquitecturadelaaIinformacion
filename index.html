@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wiki Diseño</title>
+  <link rel="stylesheet" href="estilo.css">
+  <style>
+    /* RESET */
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    main {
+      flex: 1;
+    }
+
+    /* BOTÓN HAMBURGUESA */
+    .boton-menu {
+      display: none;
+      width: 46px;
+      height: 46px;
+      border: 1.5px solid #111111;
+      border-radius: 10px;
+      background: #ffffff;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      padding: 10px;
+      cursor: pointer;
+    }
+
+    .boton-menu span {
+      display: block;
+      width: 100%;
+      height: 2px;
+      background: #111111;
+      border-radius: 999px;
+    }
+
+    /* MENÚ */
+    .menu-temas {
+      display: flex;
+
+    }
+
+    /* TABLET Y MÓVIL */
+    @media (max-width: 1024px) {
+      .boton-menu {
+        display: flex;
+        margin-top: 18px;
+      }
+
+      .menu-temas {
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        width: 100%;
+        margin-top: 20px;
+        padding: 0;
+        gap: 10px;
+      }
+
+      .menu-temas.abierto {
+        display: flex;
+      }
+
+      .menu-item {
+        width: 100%;
+        justify-content: flex-start;
+        padding: 14px 18px;
+        font-size: 14px;
+      }
+
+      .header-wiki {
+        padding: 30px 40px 18px;
+      }
+
+      .header-superior {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 24px;
+      }
+
+      .busqueda-usuario {
+        width: 100%;
+        justify-content: space-between;
+      }
+
+      .barra-busqueda {
+        width: 100%;
+        max-width: none;
+      }
+
+      .footer-wiki {
+        grid-template-columns: repeat(2, 1fr);
+        padding: 35px 40px;
+      }
+    }
+
+    /* 
+       MÓVIL PANTALLAS PEQUEÑAS */
+    @media (max-width: 600px) {
+      .header-wiki {
+        padding: 25px 20px 16px;
+      }
+
+      .titulo-wiki h1 {
+        font-size: 42px;
+      }
+
+      .busqueda-usuario {
+        gap: 15px;
+      }
+
+      .barra-busqueda {
+        height: 52px;
+      }
+
+      .icono-usuario {
+        width: 42px;
+        height: 42px;
+      }
+
+      .footer-wiki {
+        grid-template-columns: 1fr;
+        padding: 30px 20px;
+        gap: 24px;
+      }
+
+      .footer-social {
+        justify-content: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header-wiki">
+
+    <div class="header-superior">
+
+      <div class="titulo-wiki">
+        <h1>Wiki <span>Diseño</span></h1>
+        <p>Todo sobre diseño en un solo lugar.</p>
+      </div>
+
+      <div class="busqueda-usuario">
+        <div class="barra-busqueda">
+          <img src="img/lupa.svg" alt="Buscar">
+          <input type="text" placeholder="Buscar temas de diseño...">
+        </div>
+
+        <img class="icono-usuario" src="img/user-icon.svg" alt="Usuario">
+      </div>
+
+    </div>
+
+    <button class="boton-menu" id="boton-menu"
+      aria-label="Abrir menú"
+      aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav class="menu-temas" id="menu-temas">
+      <a href="#" class="menu-item">
+        <img src="img/user-experience.svg" alt="">
+        <span>Experiencia de usuario</span>
+      </a>
+      <a href="#" class="menu-item">
+        <img src="img/web-design.svg" alt="">
+        <span>Diseño web</span>
+      </a>
+      <a href="#" class="menu-item">
+        <img src="img/design-thinking.svg" alt="">
+        <span>Design thinking</span>
+      </a>
+      <a href="#" class="menu-item">
+        <img src="img/user-focus.svg" alt="">
+        <span>Diseño centrado en el usuario</span>
+      </a>
+      <a href="#" class="menu-item">
+        <img src="img/interactive.svg" alt="">
+        <span>Diseño de interacción</span>
+      </a>
+      <a href="Arquitectura-de-la-informacion.html" class="menu-item">
+        <img src="img/information.svg" alt="">
+        <span>Arquitectura de la información</span>
+      </a>
+      <a href="#" class="menu-item">
+        <img src="img/nav-design.svg" alt="">
+        <span>Diseño de navegación</span>
+      </a>
+      <a href="#" class="menu-item">
+        <img src="img/visual-design.svg" alt="">
+        <span>Diseño visual</span>
+      </a>
+    </nav>
+
+  </header>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main>
+
+
+  </main>
+
+  <!-- BOTÓN SUBIR -->
+  <button class="btn-arriba" id="btn-arriba" aria-label="Volver al inicio"> ↑
+  </button>
+
+  <!-- FOOTER -->
+  <footer class="footer-wiki">
+    <div class="footer-logo">
+      <img src="img/logo.svg" alt="Logo Wiki Diseño">
+      <h2>Wiki <span>Diseño</span></h2>
+    </div>
+
+    <div class="footer-links">
+      <a href="#">Política de Privacidad</a>
+      <a href="#">Aviso Legal</a>
+      <a href="#">Contacto</a>
+    </div>
+
+    <div class="footer-links">
+      <a href="#">Preguntas Frecuentes</a>
+      <a href="#">Sobre Nosotros</a>
+    </div>
+
+    <div class="footer-social">
+      <a href="#"><img src="img/fb.svg" alt="Facebook"></a>
+      <a href="#"><img src="img/ig.svg" alt="Instagram"></a>
+      <a href="#"><img src="img/yt.svg" alt="YouTube"></a>
+    </div>
+  </footer>
+
+  <script>
+    // ===== MENÚ ACTIVO =====
+    document.addEventListener("DOMContentLoaded", () => {
+      const paginaActual = window.location.pathname.split("/").pop();
+      const enlaces = document.querySelectorAll(".menu-item");
+      enlaces.forEach(enlace => {
+        const paginaEnlace = enlace.getAttribute("href");
+        if (paginaEnlace === paginaActual) {
+          enlace.classList.add("activo");
+        }
+      });
+    });
+
+    // ===== TOGGLE MENÚ HAMBURGUESA =====
+    const botonMenu = document.getElementById("boton-menu");
+    const menu = document.getElementById("menu-temas");
+
+    botonMenu.addEventListener("click", () => {
+      menu.classList.toggle("abierto");
+      const expandido = botonMenu.getAttribute("aria-expanded") === "true";
+      botonMenu.setAttribute("aria-expanded", !expandido);
+    });
+
+    // ===== BOTÓN SUBIR =====
+    const botonArriba = document.getElementById("btn-arriba");
+
+    window.addEventListener("scroll", function () {
+      if (window.scrollY > 350) {
+        botonArriba.classList.add("visible");
+      } else {
+        botonArriba.classList.remove("visible");
+      }
+    });
+
+    botonArriba.addEventListener("click", function () {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    });
+  </script>
+
+</body>
+</html>
